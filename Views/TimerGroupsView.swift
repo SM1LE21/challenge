@@ -15,27 +15,25 @@ struct TimerGroupsView: View {
     @State private var isAddingNewGroup = false
 
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(groups) { group in
-                    NavigationLink(destination: RunningTimerGroupView(group: group)) {
-                        Text(group.name)
-                            .font(.headline)
-                    }
-                }
-                .onDelete(perform: deleteGroup)
-            }
-            .navigationTitle("Timer Groups")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { isAddingNewGroup = true }) {
-                        Image(systemName: "plus")
-                    }
+        List {
+            ForEach(groups) { group in
+                NavigationLink(destination: RunningTimerGroupView(group: group)) {
+                    Text(group.name)
+                        .font(.headline)
                 }
             }
-            .sheet(isPresented: $isAddingNewGroup) {
-                AddGroupView(isPresented: $isAddingNewGroup)
+            .onDelete(perform: deleteGroup)
+        }
+        .navigationTitle("Timer Groups")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: { isAddingNewGroup = true }) {
+                    Image(systemName: "plus")
+                }
             }
+        }
+        .sheet(isPresented: $isAddingNewGroup) {
+            AddGroupView(isPresented: $isAddingNewGroup)
         }
     }
 

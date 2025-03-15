@@ -19,10 +19,8 @@
 		5CF4F3032D84B4120080C918 /* TunsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF4F3022D84B4120080C918 /* TunsAppApp.swift */; };
 		5CF4F3072D84B4160080C918 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CF4F3062D84B4160080C918 /* Assets.xcassets */; };
 		5CF4F30A2D84B4160080C918 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CF4F3092D84B4160080C918 /* Preview Assets.xcassets */; };
-		5CF4F3122D84B4720080C918 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF4F3112D84B4720080C918 /* Constants.swift */; };
 		5CF4F3182D84B4AF0080C918 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF4F3172D84B4AF0080C918 /* MainView.swift */; };
 		5CF4F31C2D84B4D10080C918 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF4F31B2D84B4D10080C918 /* SettingsView.swift */; };
-		5CF4F31F2D84B5430080C918 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF4F31E2D84B5430080C918 /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,10 +37,8 @@
 		5CF4F3022D84B4120080C918 /* TunsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunsAppApp.swift; sourceTree = "<group>"; };
 		5CF4F3062D84B4160080C918 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CF4F3092D84B4160080C918 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		5CF4F3112D84B4720080C918 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5CF4F3172D84B4AF0080C918 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5CF4F31B2D84B4D10080C918 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		5CF4F31E2D84B5430080C918 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +93,6 @@
 			isa = PBXGroup;
 			children = (
 				5CF4F3022D84B4120080C918 /* TunsAppApp.swift */,
-				5CF4F3112D84B4720080C918 /* Constants.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -129,7 +124,6 @@
 		5CF4F31D2D84B52B0080C918 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				5CF4F31E2D84B5430080C918 /* Helpers.swift */,
 				5CE7B7452D85BD8F00AAD629 /* NotificationManager.swift */,
 			);
 			path = Utils;
@@ -212,12 +206,10 @@
 				5CE7B7562D85D1F000AAD629 /* AddGroupView.swift in Sources */,
 				5CE7B7542D85D13300AAD629 /* RunningTimerGroupView.swift in Sources */,
 				5CE7B7522D85D09100AAD629 /* TimerGroupsView.swift in Sources */,
-				5CF4F31F2D84B5430080C918 /* Helpers.swift in Sources */,
 				5CF4F3032D84B4120080C918 /* TunsAppApp.swift in Sources */,
 				5CE7B73E2D85B61000AAD629 /* TimerModel.swift in Sources */,
 				5CE7B7442D85BCBC00AAD629 /* RunningTimerView.swift in Sources */,
 				5CF4F3182D84B4AF0080C918 /* MainView.swift in Sources */,
-				5CF4F3122D84B4720080C918 /* Constants.swift in Sources */,
 				5CE7B7502D85D04400AAD629 /* TimerGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

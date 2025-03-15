@@ -17,8 +17,9 @@ struct RunningTimerGroupView: View {
     @State private var isRunning: Bool = false
     @State private var timer: Timer?
     @AppStorage("notificationsEnabled") private var notificationsEnabled = true
-    
-    // Compute total duration of the group (sum of all timers’ durations)
+    @AppStorage("repeatGroupToggleEnabled") private var repeatGroupToggleEnabled = false
+    @State private var repeatGroup: Bool = false
+
     var totalDuration: Int {
         group.timers.reduce(0) { $0 + $1.duration }
     }
@@ -51,7 +52,13 @@ struct RunningTimerGroupView: View {
                         .progressViewStyle(LinearProgressViewStyle())
                         .padding()
                 }
-                
+
+                if repeatGroupToggleEnabled {
+                    Toggle("Repeat Group", isOn: $repeatGroup)
+                        .padding()
+                        .toggleStyle(SwitchToggleStyle(tint: .blue))
+                }
+
                 HStack {
                     Button(action: { toggleTimer() }) {
                         Image(systemName: isRunning ? "pause.fill" : "play.fill")
@@ -76,6 +83,10 @@ struct RunningTimerGroupView: View {
         }
         .onAppear {
             loadInitialTimer()
+
+            if repeatGroup {
+                resetGroup()
+            }
         }
     }
     
@@ -130,9 +141,17 @@ struct RunningTimerGroupView: View {
         if currentTimerIndex < group.timers.count {
             remainingTime = group.timers[currentTimerIndex].duration
             startTimer()
+        } else if repeatGroup {
+            resetGroup()
         }
     }
-    
+
+    private func resetGroup() {
+        currentTimerIndex = 0
+        remainingTime = group.timers[currentTimerIndex].duration
+        startTimer()
+    }
+
     private func formatTime(_ seconds: Int) -> String {
         let minutes = seconds / 60
         let remainingSeconds = seconds % 60

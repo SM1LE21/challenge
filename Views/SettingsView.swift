@@ -12,6 +12,7 @@ struct SettingsView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false
     @AppStorage("notificationsEnabled") private var notificationsEnabled = false // deactivated it by default so whoever tests this is forced to allow notifications when using the app.
     @AppStorage("repeatToggleEnabled") private var repeatToggleEnabled = false // UI Element in RunningTimerView -> if true Timers can be repeated by adhoc by toggling it.
+    @AppStorage("repeatGroupToggleEnabled") private var repeatGroupToggleEnabled = false
 
     var body: some View {
         Form {
@@ -29,6 +30,8 @@ struct SettingsView: View {
                 }
 
             Toggle("Enable Repeat Timer Toggle", isOn: $repeatToggleEnabled)
+
+            Toggle("Enable Repeat Group Toggle", isOn: $repeatGroupToggleEnabled) 
         }
         .navigationTitle("Settings")
     }

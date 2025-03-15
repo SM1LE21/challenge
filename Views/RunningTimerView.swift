@@ -16,12 +16,16 @@ struct RunningTimerView: View {
     @State private var isRunning: Bool = false
     @State private var timer: Timer?
     @AppStorage("notificationsEnabled") private var notificationsEnabled = true
+    @AppStorage("repeatToggleEnabled") private var repeatToggleEnabled = false
+    @State private var repeatCurrentTimer: Bool = false
 
     var body: some View {
         VStack {
             if currentTimerIndex < timers.count {
                 Text(timers[currentTimerIndex].name)
                     .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(.blue)
                     .padding()
 
                 Text(formatTime(remainingTime))
@@ -32,24 +36,28 @@ struct RunningTimerView: View {
                     .progressViewStyle(LinearProgressViewStyle())
                     .padding()
 
-                HStack {
-                    Button(action: { startTimer() }) {
-                        Image(systemName: "play.fill")
-                            .padding()
-                            .background(isRunning ? Color.gray : Color.green)
-                            .foregroundColor(.white)
-                            .clipShape(Circle())
-                    }
-                    .disabled(isRunning)
+                if repeatToggleEnabled {
+                    Toggle("Repeat Timer", isOn: $repeatCurrentTimer)
+                        .padding()
+                        .toggleStyle(SwitchToggleStyle(tint: .blue))
+                }
 
-                    Button(action: { pauseTimer() }) {
-                        Image(systemName: "pause.fill")
+                HStack {
+                    Button(action: { toggleTimer() }) {
+                        Image(systemName: isRunning ? "pause.fill" : "play.fill")
                             .padding()
-                            .background(isRunning ? Color.orange : Color.gray)
+                            .background(isRunning ? Color.orange : Color.green)
                             .foregroundColor(.white)
                             .clipShape(Circle())
                     }
-                    .disabled(!isRunning)
+
+                    Button(action: { skipTimer() }) {
+                        Image(systemName: "forward.fill")
+                            .padding()
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+                    }
                 }
             } else {
                 Text("All timers completed!")
@@ -65,6 +73,14 @@ struct RunningTimerView: View {
         if !timers.isEmpty {
             currentTimerIndex = 0
             remainingTime = timers[currentTimerIndex].duration
+        }
+    }
+
+    private func toggleTimer() {
+        if isRunning {
+            pauseTimer()
+        } else {
+            startTimer()
         }
     }
 
@@ -84,6 +100,10 @@ struct RunningTimerView: View {
         timer?.invalidate()
     }
 
+    private func skipTimer() {
+        nextTimer()
+    }
+
     private func nextTimer() {
         pauseTimer()
         
@@ -93,6 +113,12 @@ struct RunningTimerView: View {
                 body: "\(timers[currentTimerIndex].name) finished!",
                 in: 1
             )
+        }
+
+        if repeatCurrentTimer {
+            remainingTime = timers[currentTimerIndex].duration
+            startTimer()
+            return
         }
 
         currentTimerIndex += 1

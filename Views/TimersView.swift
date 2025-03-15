@@ -13,21 +13,39 @@ struct TimersView: View {
     @Query(sort: \TimerModel.order) private var timers: [TimerModel]
 
     @State private var isAddingNewTimer = false
+    @State private var isRunningTimer = false
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(timers) { timer in
-                    HStack {
-                        Text(timer.name)
-                            .font(.headline)
-                        Spacer()
-                        Text("\(formatTime(timer.duration))")
-                            .foregroundColor(.secondary)
+            VStack {
+                List {
+                    ForEach(timers) { timer in
+                        HStack {
+                            Text(timer.name)
+                                .font(.headline)
+                            Spacer()
+                            Text("\(formatTime(timer.duration))")
+                                .foregroundColor(.secondary)
+                        }
                     }
+                    .onDelete(perform: deleteTimer)
+                    .onMove(perform: moveTimer)
                 }
-                .onDelete(perform: deleteTimer)
-                .onMove(perform: moveTimer)
+
+                Button(action: { isRunningTimer = true }) {
+                    Text("Start Timers")
+                        .bold()
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding()
+                .disabled(timers.isEmpty)
+                .sheet(isPresented: $isRunningTimer) {
+                    RunningTimerView()
+                }
             }
             .navigationTitle("Timers")
             .toolbar {

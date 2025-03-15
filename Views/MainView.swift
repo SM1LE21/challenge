@@ -26,6 +26,14 @@ struct MainView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(.systemBackground))
             .navigationTitle("Home")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: SettingsView()) {
+                        Image(systemName: "gearshape.fill")
+                            .imageScale(.large)
+                    }
+                }
+            }
         }
         .preferredColorScheme(isDarkMode ? .dark : .light)
     }

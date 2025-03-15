@@ -1,24 +1,31 @@
-//
-//  SettingsView.swift
-//  TunsApp
-//
-//  Created by Tun Keltesch on 15/03/2025.
-//
+///
+///  SettingsView.swift
+///  TunsApp
+///
+///  Created by Tun Keltesch on 15/03/2025.
+///
 
 import SwiftUI
+import UserNotifications
 
 struct SettingsView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false
-    @AppStorage("hapticFeedback") private var hapticFeedback = true
+    @AppStorage("notificationsEnabled") private var notificationsEnabled = false // deactivated it by default so whoever tests this is forced to allow notifications when using the app.
 
     var body: some View {
         Form {
+            // Copied this from another simple APP -> Makes the Settings look a bit more Populated, One Setting simply seemed SAD
             Toggle("Dark Mode", isOn: $isDarkMode)
-                .onChange(of: isDarkMode) {
+                .onChange(of: isDarkMode) { _, _ in
                     updateAppTheme()
                 }
 
-            Toggle("Enable Haptic Feedback", isOn: $hapticFeedback)
+            Toggle("Enable Notifications", isOn: $notificationsEnabled)
+                .onChange(of: notificationsEnabled) { _, _ in
+                    if notificationsEnabled {
+                        NotificationManager.shared.requestPermission()
+                    }
+                }
         }
         .navigationTitle("Settings")
     }

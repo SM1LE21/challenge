@@ -13,7 +13,7 @@ struct TunsAppApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
-                .modelContainer(for: TimerModel.self)
+                .modelContainer(for: [TimerModel.self, TimerGroup.self]) // models to be tracked by SwiftData
         }
     }
 }
